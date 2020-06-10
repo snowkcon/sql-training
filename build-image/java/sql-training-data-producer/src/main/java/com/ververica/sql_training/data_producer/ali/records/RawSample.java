@@ -52,6 +52,6 @@ public class RawSample implements AliRecord{
 
     @Override
     public Date getEventTime() {
-        return null;
+        return this.eventTime;
     }
 }

@@ -31,7 +31,7 @@ public class BehaviorLog implements AliRecord{
 
     @Override
     public Date getEventTime() {
-        return null;
+        return this.eventTime;
     }
 
     @Override

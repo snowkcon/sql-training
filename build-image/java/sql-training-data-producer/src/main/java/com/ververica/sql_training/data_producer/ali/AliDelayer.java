@@ -20,6 +20,7 @@ import com.ververica.sql_training.data_producer.ali.records.AliRecord;
 import com.ververica.sql_training.data_producer.records.TaxiRecord;
 
 import java.time.Instant;
+import java.util.Date;
 import java.util.function.UnaryOperator;
 
 /**
@@ -56,7 +57,9 @@ public class AliDelayer implements UnaryOperator<AliRecord> {
 
     @Override
     public AliRecord apply(AliRecord record) {
-        long thisEventTime = record.getEventTime().getTime();
+        System.out.println(record);
+        Date eventTime = record.getEventTime();
+        long thisEventTime = eventTime.getTime();
 
         if (startEventTime < 0) {
             // remember event time of first record
