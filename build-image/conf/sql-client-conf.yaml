@@ -147,7 +147,46 @@ tables:
     history-table: DriverChanges
     primary-key: taxiId
     time-attribute: usageStartTime
-
+  - name: RawSample
+    type: source
+    update-mode: append
+    schema:
+    - name: user
+      type: INT
+    - name: adgroupId
+      type: INT
+    - name: pid
+      type: STRING
+    - name: nonclk
+      type: INT
+    - name: clkl
+      type: INT
+    - name: rawTime
+      type: TIMESTAMP
+      rowtime:
+        timestamps:
+          type: "from-field"
+          from: "eventTime"
+        watermarks:
+          type: "periodic-bounded"
+          delay: "60000"
+    connector:
+      property-version: 1
+      type: kafka
+      version: universal
+      topic: rawSample
+      startup-mode: earliest-offset
+      properties:
+      - key: zookeeper.connect
+        value: zookeeper:2181
+      - key: bootstrap.servers
+        value: kafka:9092
+      - key: group.id
+        value: testGroup
+    format:
+      property-version: 1
+      type: json
+      schema: "ROW(user INT, adgroupId INT, eventTime TIMESTAMP, pid STRING, nonclk INT, clkl INT)"
 functions:
 - name: timeDiff
   from: class
