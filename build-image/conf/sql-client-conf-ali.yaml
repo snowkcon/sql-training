@@ -54,7 +54,7 @@ tables:
       type: kafka
       version: universal
       topic: rawSample
-      startup-mode: earliest-offset
+      startup-mode: latest-offset
       properties:
       - key: zookeeper.connect
         value: zookeeper:2181
@@ -62,10 +62,52 @@ tables:
         value: kafka:9092
       - key: group.id
         value: testGroup
+      - key: enable.offset.commit
+        value: false
     format:
       property-version: 1
       type: json
       schema: "ROW(user INT,eventTime TIMESTAMP, adgroupId INT,  pid STRING, nonclk INT, clkl INT)"
+  - name: behaviorLog
+    type: source
+    update-mode: append
+    schema:
+    - name: user
+      type: INT
+    - name: behaviorTime
+      type: TIMESTAMP
+      rowtime:
+        timestamps:
+          type: "from-field"
+          from: "eventTime"
+        watermarks:
+          type: "periodic-bounded"
+          delay: "60000"
+    - name: btag
+      type: STRING
+    - name: cate
+      type: INT
+    - name: brand
+      type: INT
+    connector:
+      property-version: 1
+      type: kafka
+      version: universal
+      topic: behaviorLog
+      startup-mode: latest-offset
+      properties:
+      - key: zookeeper.connect
+        value: zookeeper:2181
+      - key: bootstrap.servers
+        value: kafka:9092
+      - key: group.id
+        value: testGroup
+      - key: enable.offset.commit 
+        value: false
+    format:
+      property-version: 1
+      type: json
+      schema: "ROW(user INT,eventTime TIMESTAMP, btag STRING, cate INT, brand INT)"
 #==============================================================================
 # Execution properties
 #==============================================================================

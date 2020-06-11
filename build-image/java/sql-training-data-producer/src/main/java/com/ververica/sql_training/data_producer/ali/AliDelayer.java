@@ -57,7 +57,6 @@ public class AliDelayer implements UnaryOperator<AliRecord> {
 
     @Override
     public AliRecord apply(AliRecord record) {
-        System.out.println(record);
         Date eventTime = record.getEventTime();
         long thisEventTime = eventTime.getTime();
 

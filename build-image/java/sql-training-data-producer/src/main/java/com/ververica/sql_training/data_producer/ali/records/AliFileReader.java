@@ -58,11 +58,4 @@ public class AliFileReader implements Supplier<AliRecord> {
             throw new NoSuchElementException("All records read from " + filePath);
         }
     }
-
-    public static void main(String[] args) throws IOException {
-        AliFileReader aliFileReader = new AliFileReader("/Users/momo/jl/rs/data/behavior_log.csv", BehaviorLog.class);
-        System.out.println(aliFileReader.get());
-        System.out.println(aliFileReader.get());
-        System.out.println(aliFileReader.get());
-    }
 }
