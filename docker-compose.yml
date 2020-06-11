@@ -1,22 +1,7 @@
 version: '2.1'
 services:
   sql-client:
-    image: ali-data-flind 
-#    command: 
-#      - /bin/bash
-#      - -c
-#      - |
-#        apt-get update
-#        apt-get install git -y
-#        cd /opt/sql-client
-#        wget https://downloads.apache.org/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz
-#        tar -xzvf apache-maven-3.6.3-bin.tar.gz
-#        cd /opt/data/
-#        git clone https://github.com/snowkcon/sql-training.git 
-#        cd sql-training/build-image/java/sql-training-data-producer/
-#        sed -i '1i\set JAVA_HOME=/usr/local/openjdk-8/' /opt/sql-client/apache-maven-3.6.3/bin/mvn
-#        /opt/sql-client/apache-maven-3.6.3/bin/mvn clean install
-#    command: "java -classpath /opt/data/sql-training-data-producer-1-FLINK-1.10_2.11.jar com.ververica.sql_training.data_producer.ali.AliRecordProducer --input file /opt/data --output kafka kafka:9092  --speedup 10.0"
+    image: fhueske/flink-sql-training:1-FLINK-1.10-scala_2.11 
 #    command: "java -classpath /opt/data/data-producer.jar com.ververica.sql_training.data_producer.TaxiRecordProducer --input file /opt/data --output kafka kafka:9092 --speedup 10.0"
     depends_on:
       - kafka
