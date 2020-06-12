@@ -59,7 +59,7 @@ public class AliDelayer implements UnaryOperator<AliRecord> {
     public AliRecord apply(AliRecord record) {
         Date eventTime = record.getEventTime();
         long thisEventTime = eventTime.getTime();
-
+        System.out.println(record);
         if (startEventTime < 0) {
             // remember event time of first record
             startEventTime = thisEventTime;
