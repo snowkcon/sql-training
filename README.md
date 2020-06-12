@@ -41,5 +41,10 @@ GROUP BY
 ```
 
 ----
+1. create kafka topic 
+2. apt-get install git 
+3. git clone project
+4. start data producer
+5. start client user ali-conf
 
 *Apache Flink, Flink®, Apache®, the squirrel logo, and the Apache feather logo are either registered trademarks or trademarks of The Apache Software Foundation.*
