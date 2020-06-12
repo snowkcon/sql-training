@@ -1,7 +1,7 @@
 version: '2.1'
 services:
   sql-client:
-    image: ali-data-all
+    image: ali-data-dta 
     command:
       - /bin/bash
       - -c
