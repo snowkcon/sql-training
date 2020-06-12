@@ -1,2 +1,1 @@
-#docker-compose exec sql-client ./sql-client.sh
-docker-compose exec sql-client ./sql-client-ali.sh
+docker-compose exec sql-client ./sql-training/build-image/sql-client/sql-client.sh 
