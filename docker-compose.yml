@@ -1,8 +1,17 @@
 version: '2.1'
 services:
   sql-client:
-    image: fhueske/flink-sql-training:1-FLINK-1.10-scala_2.11 
-    command: "java -classpath /opt/data/data-producer.jar com.ververica.sql_training.data_producer.TaxiRecordProducer --input file /opt/data --output kafka kafka:9092 --speedup 10.0"
+    image: ali-data-all
+    command:
+      - /bin/bash
+      - -c
+      - |
+      cd /opt/sql-client/sql-training/
+      git pull
+      cd build-image/java/sql-training-data-producer/
+      export JAVA_HOME=/usr/lib/jvm/java-1.11.0-openjdk-amd64
+      mvn clean install
+      java -classpath /opt/sql-client/sql-training/build-image/java/sql-training-data-producer/target/sql-training-data-producer-1-FLINK-1.10_2.11.jar com.ververica.sql_training.data_producer.ali.AliRecordProducer --input file /opt/data --output kafka kafka:9092 --speedup 100.0
     depends_on:
       - kafka
       - jobmanager
